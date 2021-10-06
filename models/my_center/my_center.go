@@ -24,7 +24,7 @@ type SalarySlip struct {
 	CreateTime        time.Time `orm:"type(datetime);auto_now;description(创建时间)"`
 }
 
-func (s SalarySlip) TableName() string {
+func (s *SalarySlip) TableName() string {
 	return "sys_salary_slip"
 
 }

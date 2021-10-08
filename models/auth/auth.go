@@ -77,7 +77,7 @@ type CarsApply struct {
 	Reason       string    `orm:"description(申请理由);size(255)"`
 	Destination  string    `orm:"description(目的地);size(64)"`
 	ReturnDate   time.Time `orm:"type(date);auto_now;description(归还日期)"`
-	ReturnStatus int       `orm:"descrption(1:已归还，0：未归还);default(0)"`
+	ReturnStatus int       `orm:"description(1:已归还，0：未归还);default(0)"`
 	AuditStatus  int       `orm:"description(1:同意，2:未同意，3:未审批);default(3)"`
 	AuditOption  string    `orm:"description(审批意见);size(255)"`
 	IsActive     int       `orm:"default(1);description(启用:1,停用:0)"`
@@ -92,7 +92,7 @@ type MessageNotify struct {
 	Flag    int    `orm:"description(1:车辆逾期，2:所有通知);default(1)"`
 	Title   string `orm:"size(64);description(消息标题)"`
 	Content string `orm:"type(text);description(消息内容)"`
-	User    *User  `orm:"rel(fk);desription(用户外键)"`
+	User    *User  `orm:"rel(fk);description(用户外键)"`
 	ReadTag int    `orm:"description(1:已读，0:未读)"`
 }
 

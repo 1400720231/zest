@@ -68,10 +68,10 @@ func (self *LoginController) Post() {
 			response["msg"] = "登陆失败"
 		}
 	}
-	self.Data["json"] = response
 
-	//ServeJSON会把self.Data["json"对应的值以json格式返回，也就是self.Data["json"]的"json"是在框架内
-	//强制解析的
+	//ServeJSON会把self.Data["json"]对应的值以json格式返回，也就是self.Data["json"]的"json"是在框架内
+	//强制解析的,是固定值
+	self.Data["json"] = response
 	self.ServeJSON()
 
 }

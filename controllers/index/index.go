@@ -1,4 +1,4 @@
-package controllers
+package index
 
 import (
 	"github.com/beego/beego/v2/client/orm"

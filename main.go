@@ -36,10 +36,20 @@ func init() {
 }
 
 func main() {
+	//开启session 或者配置文件写：sessionon = true
+	/*
+		如果不开启这个配置但是你用了self.Session.set相关的用法，会报指针错误：invalid memory address or nil pointer dereference
+		但是其实不是语法错误只是你没配置开启session，如果你对整个框架熟不熟悉会一直以为是语法错误，很难排查。。。
+	*/
+	beego.BConfig.WebConfig.Session.SessionOn = true
 	//数据库命令行迁移
 	//orm.RunCommand()
 	//直接执行数据库迁移操作
-	err := orm.RunSyncdb("default", false, true)
-	fmt.Println(err)
+	//err := orm.RunSyncdb("default", false, true)
+	//fmt.Println(err)
+	orm.Debug = true
 	beego.Run()
+	//res := utils.GetMd5Str("admin123")
+	//fmt.Println(res)
+
 }

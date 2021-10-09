@@ -16,7 +16,13 @@ type LoginController struct {
 
 //结构体函数封装，Get()方法来自beego.Controller
 func (c *LoginController) Get() {
+	user_id := c.Ctx.Input.Session("id")
 
+	//>0表示user_id取的到，表示当前有user信息在session中 即是登陆的
+	//登陆就直接跳转到首页
+	if user_id != nil {
+		c.Redirect(beego.URLFor("HomeController.Get"), 302)
+	}
 	c.TplName = "login/login.html"
 }
 

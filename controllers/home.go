@@ -13,13 +13,14 @@ type HomeController struct {
 func (h *HomeController) Get() {
 	// 后端首页
 	o := orm.NewOrm()
-
+	//从session中获取user_id，django的session中间件帮我们做了这一步封装成了request.user
 	user_id := h.GetSession("id")
-	// interface --> int
+	// interface --> int,静态语言不知道user_id返回的具体类型，GetSession返回的是interface{}数据，所以需要转成int
 	user := auth.User{Id: user_id.(int)}
-
+	//外键拼接 类似django的related_name的效果
 	o.LoadRelated(&user, "Role")
 
+	//数组对象保存当前用户的角色（一个用户可能多个角色，所以这里是切片）
 	auth_arr := []int{}
 	for _, role := range user.Role {
 		role_data := auth.Role{Id: role.Id}
@@ -37,6 +38,7 @@ func (h *HomeController) Get() {
 	//"select * from sys_user where id in (1,2,3,1)"
 
 	trees := []auth.Tree{}
+	//迭代角色 查询角色对应的权限菜单栏 拼接返回给前端展示
 	for _, auth_data := range auths { // 一级菜单
 
 		pid := auth_data.Id // 根据pid获取所有的子解点

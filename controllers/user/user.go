@@ -69,7 +69,7 @@ func (u *UserController) List() {
 
 	users := []auth.User{}
 	// 每页显示的条数
-	pagePerNum := 8
+	pagePerNum := 2
 	// 当前页
 	currentPage, err := u.GetInt("page")
 

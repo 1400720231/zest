@@ -6,7 +6,7 @@ func LoginFilter(ctx *context.Context) {
 
 	// 获取session
 	id := ctx.Input.Session("id")
-	if id == nil { // 说明未登录
-		ctx.Redirect(302, "/")
+	if id == nil { // 说明未登录,跳转到首页
+		ctx.Redirect(302, "/login")
 	}
 }

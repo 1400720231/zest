@@ -11,6 +11,11 @@ type HomeController struct {
 }
 
 func (h *HomeController) Get() {
+	user_id2 := h.Ctx.Input.Session("id")
+
+	if user_id2 == nil {
+		h.Redirect(beego.URLFor("LoginController.Get"), 301)
+	}
 	// 后端首页
 	o := orm.NewOrm()
 	//从session中获取user_id，django的session中间件帮我们做了这一步封装成了request.user

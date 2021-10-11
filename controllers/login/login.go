@@ -3,6 +3,7 @@ package login
 import (
 	"fmt"
 	"github.com/beego/beego/v2/client/orm"
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 	"zset/models/auth"
 	"zset/utils"
@@ -18,7 +19,7 @@ type LoginController struct {
 func (c *LoginController) Get() {
 
 	user_id := c.Ctx.Input.Session("id")
-
+	logs.Error(user_id)
 	//>0表示user_id取的到，表示当前有user信息在session中 即是登陆的
 	//登陆就直接跳转到首页
 	//这是基于接口粒度的控制函数，main.go中可以们用filter做了未登陆状态下的跳转，相当于django的LoginRequiredMixin或者@login_required装饰器

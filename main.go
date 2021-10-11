@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/beego/beego/v2/client/orm"
+	"github.com/beego/beego/v2/core/logs"
 	"zset/utils"
 
 	//beego2和之前的用法有些不一样 请尽量参考官方文档
@@ -52,6 +53,13 @@ func main() {
 	//err := orm.RunSyncdb("default", false, true)
 	//fmt.Println(err)
 	orm.Debug = true
+	//日志配置
+	//声明一个日志对象，下面有一个日志处理器，类型为文件类型的日志，文件配置的位置在当前目录的logs文件名为log.out 有两个
+	//日志级别error info,在logs下面会有三个文件：log.out log.error.out log.info.out
+	//log.out>log.error.out+log.info.out log.out还保存了beego的请求日志
+	//beego每次启动的日志会保存在log.info.out中
+	//其他的日志信息就是你调用logs.Error logs.Info对应的日志记录内容了
+	logs.SetLogger(logs.AdapterMultiFile, `{"filename":"logs/log.out","separate":["error","info"]}`)
 	beego.Run()
 	//res := utils.GetMd5Str("admin123")
 	//fmt.Println(res)

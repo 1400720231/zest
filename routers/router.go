@@ -2,11 +2,11 @@ package routers
 
 import (
 	beego "github.com/beego/beego/v2/server/web"
+	"zset/controllers/auth"
 	"zset/controllers/index"
+	"zset/controllers/login"
 	"zset/controllers/logout"
 	"zset/controllers/user"
-
-	"zset/controllers/login"
 )
 
 func init() {
@@ -23,4 +23,8 @@ func init() {
 	beego.Router("/main/user/to_edit", &user.UserController{}, "get:ToUpdate")
 	beego.Router("/main/user/do_edit", &user.UserController{}, "post:DoUpdate")
 	beego.Router("/main/user/muli_delete", &user.UserController{}, "post:MuliDelete")
+	//auth模块
+
+	beego.Router("/main/user/auth", &auth.AuthController{}, "get:List")
+
 }
